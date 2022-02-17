@@ -88,7 +88,7 @@ class Login extends Component {
                     </Grid>
                     <Grid style={{ margin: '10px' }}>
                         <FormControl>
-                            <TextField value={this.state.textFieldPasswort} onChange = { this.handlePasswortTextFieldChange }id="outlined-basic" label="Passwort" variant="outlined" />
+                            <TextField value={this.state.textFieldPasswort} onChange = { this.handlePasswortTextFieldChange } type="password" id="outlined-basic" label="Passwort" variant="outlined" />
                         </FormControl>
                     </Grid>
                     <Grid>

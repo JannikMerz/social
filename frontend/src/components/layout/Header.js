@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Typography, Tabs, Tab, AppBar, Toolbar, Box } from '@material-ui/core';
+import { Paper, Typography, Tabs, Tab, AppBar, Toolbar, Box, Popover, Button } from '@material-ui/core';
 import logo from './Logo.png';
+import ProfileDropDown from '../dialogs/ProfilDropDown';
 // import { Link as RouterLink } from 'react-router-dom';
 // import ProfileDropDown from '../dialogs/ProfileDropDown';
 
@@ -26,17 +27,18 @@ class Header extends Component {
 
   /** Renders the component */
   render() {
-    const { user, currentPerson } = this.props;
+    const { currentAccountName } = this.props;
 
     return (
     <div style={{ width: '100%'}}>
       <AppBar style={{ backgroundColor: '#FFF0CA', height: '150px', justifyContent: 'center', alignItems: 'center', marginBottom: '200px'}}>
-        <img src={logo} alt="Social Pet" style={{ width : 300, margin: 50}}/>
-      </AppBar>
-        <Toolbar>
-            
+      <Toolbar>
+          <img src={logo} alt="Social Pet" style={{ width : '300px', margin: '50px'}}/>
+        <div style={{ alignItems: 'right' }}>
+         <ProfileDropDown currentAccountName={ currentAccountName }></ProfileDropDown>
+         </div>
         </Toolbar>
-      
+        </AppBar>
       <Toolbar />
       </div>
     )

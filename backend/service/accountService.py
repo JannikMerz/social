@@ -31,6 +31,32 @@ class AccountService(Mapper):
         cursor.close()
         return result
 
+    def find_by_name(self, name):
+        result = None
+
+        cursor = self._connection.cursor()
+        command = "SELECT * FROM account WHERE name='{}'".format(name)
+        cursor.execute(command)
+        tuples = cursor.fetchall()
+
+        try:
+            (id, name, passwort, email) = tuples[0]
+            account = Account()
+            account._id = id
+            account._name = name
+            account._passwort = passwort
+            account._email = email
+            result = account
+
+        except IndexError:
+            """Der IndexError wird oben beim Zugriff auf tuples[0] auftreten, wenn der vorherige SELECT-Aufruf
+			keine Tupel liefert, sondern tuples = cursor.fetchall() eine leere Sequenz zurück gibt."""
+            result = None
+
+        self._connection.commit()
+        cursor.close()
+        return result
+
     def find_all(self):
         """Auslesen aller Bewertungen aus der Datenbank
         :return Alle Bewertung-Objekte im System

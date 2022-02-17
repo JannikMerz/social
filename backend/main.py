@@ -44,6 +44,15 @@ class AccountOps(Resource):
         result = controller.get_account(id)
         return result
 
+@petApp.route('/account-by-name/<string:name>')
+@petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
+class AccountOps(Resource):
+    @petApp.marshal_list_with(account)
+    def get(self, name):
+        controller = Controller()
+        result = controller.get_account_by_name(name)
+        return result
+
 
 if __name__ == '__main__':
     app.run(debug=True)

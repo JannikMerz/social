@@ -3,6 +3,8 @@ import Header from './components/layout/Header';
 import SocialPetApi from './api/SocialPetApi'
 import { Container, Card, Typography } from '@material-ui/core';
 import Login from './components/pages/Login'
+import Test from './components/dialogs/ProfilDropDown.js'
+
 
 class App extends React.Component {
 
@@ -12,7 +14,6 @@ class App extends React.Component {
 
 		// Init an empty state
 		this.state = {
-			currentAccount: null,
       currentAccountName: null
 		};
 	}
@@ -67,7 +68,7 @@ class App extends React.Component {
         {
         currentAccountName ?
           <div>
-            <Header></Header>
+            <Header currentAccountName={ currentAccountName }></Header>
               <Container style={{ marginTop: '50px' }}>
                 <Card style={{ height: '300px', marginBottom: '50px' }}>
                   <Typography style={{ margin: '10px' }}>Hier Beitrag erstellen</Typography>
@@ -75,7 +76,8 @@ class App extends React.Component {
                 <Card>
                   <Typography style={{ margin: '10px' }}>Hier Feed</Typography>
                 </Card>
-              </Container>
+              </Container>              
+
           </div>
 
         :

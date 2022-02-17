@@ -29,6 +29,7 @@ export default class SocialPetApi {
       )
 
     #getAccountByIdURL = (id) => `${this.#socialPetAPIBaseURL}/account/${id}`;
+    #getAccountByNameURL = (name) => `${this.#socialPetAPIBaseURL}/account-by-name/${name}`;
 
     /**
        * Gibt einen Account mit bestimmter id zurück
@@ -37,6 +38,16 @@ export default class SocialPetApi {
        */
      getAccountById(id) {
       return this.#fetchAdvanced(this.#getAccountByIdURL(id)).then((responseJSON) => {
+        let account = Account.fromJSON(responseJSON);
+        console.info(account);
+        return new Promise(function (resolve) {
+          resolve(account);
+        })
+      })
+    }
+
+    getAccountByName(name) {
+      return this.#fetchAdvanced(this.#getAccountByNameURL(name)).then((responseJSON) => {
         let account = Account.fromJSON(responseJSON);
         console.info(account);
         return new Promise(function (resolve) {

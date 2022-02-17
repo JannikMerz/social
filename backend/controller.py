@@ -19,3 +19,7 @@ class Controller(object):
     def get_account(self, id):
        with AccountService() as mapper:
             return mapper.find_by_id(id)
+
+    def get_account_by_name(self, name):
+       with AccountService() as mapper:
+            return mapper.find_by_name(name)
