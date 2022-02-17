@@ -1,5 +1,6 @@
 
 from service.accountService import AccountService
+from service.beitragService import BeitragService
 
 
 class Controller(object):
@@ -23,3 +24,11 @@ class Controller(object):
     def get_account_by_name(self, name):
        with AccountService() as mapper:
             return mapper.find_by_name(name)
+    
+    def get_beitraege(self):
+       with BeitragService() as mapper:
+            return mapper.find_all()
+
+    def post_beitrag(self, beitrag):
+        with BeitragService() as mapper:
+            return mapper.insert(beitrag)

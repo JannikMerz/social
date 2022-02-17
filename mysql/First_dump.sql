@@ -39,14 +39,15 @@ UNLOCK TABLES;
 -- Table `mydb`.`beitrag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `socialPet`.`beitrag` (
-  `idbeitrag` INT NOT NULL,
+  `idBeitrag` INT NOT NULL,
+  `titel` VARCHAR(45) NULL,
   `inhalt` VARCHAR(45) NULL,
   `datum` VARCHAR(45) NULL,
-  `Account_id` INT NOT NULL,
-  PRIMARY KEY (`idbeitrag`, `account_id`),
-  INDEX `fk_beitrag_Account_idx` (`account_id` ASC) VISIBLE,
-  CONSTRAINT `fk_beitrag_Account`
-    FOREIGN KEY (`account_id`)
+  `accountId` INT NOT NULL,
+  PRIMARY KEY (`idbeitrag`, `accountId`),
+  INDEX `fk_beitrag_accountIdx` (`accountId` ASC) VISIBLE,
+  CONSTRAINT `fk_beitrag_account`
+    FOREIGN KEY (`accountId`)
     REFERENCES `socialPet`.`account` (`idAccount`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

@@ -1,4 +1,5 @@
 import Account from './accountModel';
+import Beitrag from './beitragModel';
 
 export default class SocialPetApi {
 
@@ -30,6 +31,9 @@ export default class SocialPetApi {
 
     #getAccountByIdURL = (id) => `${this.#socialPetAPIBaseURL}/account/${id}`;
     #getAccountByNameURL = (name) => `${this.#socialPetAPIBaseURL}/account-by-name/${name}`;
+    #getBeitraegeURL = () => `${this.#socialPetAPIBaseURL}/beitraege`;
+
+    #postBeitragURL = () => `${this.#socialPetAPIBaseURL}/beitrag`;
 
     /**
        * Gibt einen Account mit bestimmter id zurück
@@ -53,6 +57,26 @@ export default class SocialPetApi {
         return new Promise(function (resolve) {
           resolve(account);
         })
+      })
+    }
+    getBeitraege() {
+      return this.#fetchAdvanced(this.#getBeitraegeURL()).then((responseJSON) => {
+        let beitraege = Beitrag.fromJSON(responseJSON);
+        console.info(beitraege);
+        return new Promise(function (resolve) {
+          resolve(beitraege);
+        })
+      })
+    }
+
+    postBeitrag(beitrag) {
+      return this.#fetchAdvanced(this.#postBeitragURL(), {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(beitrag)
       })
     }
 }

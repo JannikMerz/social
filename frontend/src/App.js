@@ -5,12 +5,16 @@ import { Container, Card, Typography } from '@material-ui/core';
 import Login from './components/pages/Login'
 import Test from './components/dialogs/ProfilDropDown.js'
 
+import BeitragListe from './components/BeitragListe'
+import PostBeitrag from './components/PostBeitrag'
 
 class App extends React.Component {
 
 	/** Constructor of the app, which initializes firebase  */
 	constructor(props) {
 		super(props);
+
+		this.child = React.createRef();
 
 		// Init an empty state
 		this.state = {
@@ -59,6 +63,10 @@ class App extends React.Component {
 		this.getSessionStorage()
   }
 
+	loadBeitraege = () => {
+		this.child.current.getBeitraege();
+	}
+
 	/** Renders the whole app */
 	render() {
     const { currentAccount, currentAccountName } = this.state;
@@ -69,14 +77,10 @@ class App extends React.Component {
         currentAccountName ?
           <div>
             <Header currentAccountName={ currentAccountName }></Header>
-              <Container style={{ marginTop: '50px' }}>
-                <Card style={{ height: '300px', marginBottom: '50px' }}>
-                  <Typography style={{ margin: '10px' }}>Hier Beitrag erstellen</Typography>
-                </Card>
-                <Card>
-                  <Typography style={{ margin: '10px' }}>Hier Feed</Typography>
-                </Card>
-              </Container>              
+			<Container maxWidth='md' style={{ marginTop: '50px' }}>
+			<PostBeitrag loadBeitraege={this.loadBeitraege}></PostBeitrag>
+			<BeitragListe ref={this.child}></BeitragListe>
+        </Container>           
 
           </div>
 

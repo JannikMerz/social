@@ -1,8 +1,21 @@
 
+import datetime
+
 class Beitrag:
 
     def __init__(self):
         self._id = 0
-        self._erstellungszeit = datetime.datetime.now()
+        self._erstellungszeit = datetime.datetime.now().replace(second=0, microsecond=0)
+        self._titel = ''
         self._inhalt = ''
-        self._account = ''
+        self._accountId = ''
+
+
+    @staticmethod
+    def from_dict(dictionary=dict()):
+        obj = Beitrag()
+        obj._id = dictionary['id']
+        obj._titel = dictionary['titel']
+        obj._inhalt = dictionary['inhalt']
+        obj._accountId = dictionary['accountId']
+        return obj
