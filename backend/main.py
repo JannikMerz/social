@@ -8,6 +8,7 @@ from flask import request
 import json
 
 from model.accountModel import Account
+from model.beitragModel import Beitrag
 
 from service.mapper import Mapper
 from controller import Controller
@@ -32,6 +33,10 @@ account = api.model('Account', {
 
 beitrag = api.model('Beitrag', {
     'id': fields.Integer(attribute='_id', description='ID des BOs'),
+    'datum': fields.String(attribute='_erstellungszeit', description=''),
+    'titel': fields.String(attribute='_titel', description=''),
+    'inhalt': fields.String(attribute='_inhalt', description=''),
+    'accountId': fields.Integer(attribute='_accountId', description=''),
 })
 
 
@@ -43,6 +48,31 @@ class AccountOps(Resource):
         controller = Controller()
         result = controller.get_account(id)
         return result
+
+@petApp.route('/beitraege')
+@petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
+class BeitraegeOps(Resource):
+    @petApp.marshal_list_with(beitrag)
+    def get(self):
+        controller = Controller()
+        result = controller.get_beitraege()
+        return result
+
+@petApp.route('/beitrag')
+@petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
+class ProjektartOperationen(Resource):
+
+    @petApp.expect(beitrag)
+    def post (self):
+        
+        controller = Controller()
+        beitrag = Beitrag.from_dict(api.payload)
+
+        if beitrag is not None:
+            controller.post_beitrag(beitrag)
+            return 200
+        else: 
+            return '', 500
 
 
 if __name__ == '__main__':

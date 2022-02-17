@@ -1,4 +1,5 @@
 from service.mapper import Mapper
+from model.beitragModel import Beitrag
 
 
 class BeitragService(Mapper):
@@ -6,56 +7,54 @@ class BeitragService(Mapper):
         super().__init__()
 
     def find_by_id(self, id):
-        result = None
-
-        cursor = self._connection.cursor()
-        command = "SELECT  FROM bewertungen WHERE id={}".format(id)
-        cursor.execute(command)
-        tuples = cursor.fetchall()
-
-        try:
-            (id, note) = tuples[0]
-            bewertung = Bewertung()
-            bewertung.set_id(id)
-            bewertung.set_note(note)
-            result = bewertung
-
-        except IndexError:
-            """Der IndexError wird oben beim Zugriff auf tuples[0] auftreten, wenn der vorherige SELECT-Aufruf
-			keine Tupel liefert, sondern tuples = cursor.fetchall() eine leere Sequenz zurück gibt."""
-            result = None
-
-        self._connection.commit()
-        cursor.close()
-        return result
+        pass
 
     def find_all(self):
-        """Auslesen aller Bewertungen aus der Datenbank
-        :return Alle Bewertung-Objekte im System
-        """
         result = []
 
         cursor = self._connection.cursor()
-        
-        cursor.execute("SELECT * from bewertungen")
+
+        cursor.execute("SELECT * from beitrag ORDER BY datum DESC LIMIT 50")
         tuples = cursor.fetchall()
 
-        for (id,note) in tuples:
-            bewertung = Bewertung()
-            bewertung.set_id(id)
-            bewertung.set_note(note)
-            result.append(bewertung)
-        
-    
+        for (idBeitrag, titel, inhalt, datum, accountId) in tuples:
+            beitrag = Beitrag()
+            beitrag._id = idBeitrag
+            beitrag._titel = titel
+            beitrag._inhalt = inhalt
+            beitrag._erstellungszeit = datum
+            beitrag._accountId = accountId
+            result.append(beitrag)
 
         self._connection.commit()
         cursor.close()
         return result
 
+    def insert(self, beitrag):
 
-    def insert(self):
-        """Add the given object to the database"""
-        pass
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT MAX(idBeitrag) AS maxid FROM beitrag")
+        tuples = cursor.fetchall()
+
+        for (maxid) in tuples:
+            if maxid[0] is None:
+                beitrag._id = 1
+            else:
+                beitrag._id = maxid[0]+1
+
+        command = "INSERT INTO beitrag (idBeitrag, titel, inhalt, datum, accountId) VALUES (%s,%s,%s,%s, %s)"
+        data = (
+            beitrag._id,
+            beitrag._titel,
+            beitrag._inhalt,
+            beitrag._erstellungszeit,
+            beitrag._accountId
+        )
+        cursor.execute(command, data)
+        self._connection.commit()
+        cursor.close()
+
+        return beitrag
 
     def update(self):
         """Update an already given object in the DB"""

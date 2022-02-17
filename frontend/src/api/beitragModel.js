@@ -1,11 +1,11 @@
 export default class Beitrag{
 
-	constructor(aid, aerstellungszeit, ainhalt, aaccount){
-		super();
+	constructor(aid, adatum, atitel, ainhalt, aaccount){
         this.id = aid
-        this.erstellungszeit = aerstellungszeit
+        this.datum = adatum
+		this.titel = atitel
         this.inhalt = ainhalt
-        this.account = aaccount	
+        this.accountId = aaccount	
     }
 
 	/**
