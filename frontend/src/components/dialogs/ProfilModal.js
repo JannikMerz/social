@@ -60,7 +60,7 @@ class ProfilModal extends Component {
         console.log(currentAccountEmail)
         return (
         <div>
-            <Button onClick={this.handleOpen} style={{margin: '10px', marginLeft: '40px', marginRight: '40px'}}>Profil</Button>
+            <Button onClick={this.handleOpen} style={{margin: '10px', marginLeft: '40px', marginRight: '40px', color: '#EDA900'}}>Profil</Button>
             <Modal
             open={open}
             onClose={this.handleClose}

@@ -39,7 +39,7 @@ export default function BasicPopover(props) {
             <ProfilModal user={ props.currentAccountName }></ProfilModal>
         </div>
         <div>
-            <Button style={{margin: '10px', marginLeft: '40px', marginRight: '40px'}} onClick={ logout }>Logout</Button>
+            <Button style={{margin: '10px', marginLeft: '40px', marginRight: '40px', color: '#EDA900'}} onClick={ logout }>Logout</Button>
         </div>
       </Popover>
     </div>
