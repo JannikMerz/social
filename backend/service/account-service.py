@@ -1,22 +1,15 @@
-from server.db.Mapper import Mapper
-from server.bo.Bewertung import Bewertung
+from mapper import Mapper
 
 
-class BewertungMapper(Mapper):en in Datenbankstrukturen und umgekehrt
-    """
+class AccountService(Mapper):
     def __init__(self):
         super().__init__()
 
     def find_by_id(self, id):
-        """Suchen einer Bewertung der übergebenen ID. 
-        :param id Primärschlüsselattribut aus der Datenbank
-        :return Bewertung-Objekt, welche mit der ID übereinstimmt,
-                None wenn kein Eintrag gefunden wurde
-        """
         result = None
 
         cursor = self._connection.cursor()
-        command = "SELECT id, note FROM bewertungen WHERE id={}".format(id)
+        command = "SELECT  FROM bewertungen WHERE id={}".format(id)
         cursor.execute(command)
         tuples = cursor.fetchall()
 
