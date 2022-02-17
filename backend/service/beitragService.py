@@ -1,4 +1,4 @@
-from mapper import Mapper
+from service.mapper import Mapper
 
 
 class BeitragService(Mapper):

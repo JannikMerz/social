@@ -1,5 +1,5 @@
-from mapper import Mapper
-
+from service.mapper import Mapper
+from model.accountModel import Account
 
 class AccountService(Mapper):
     def __init__(self):
@@ -9,17 +9,17 @@ class AccountService(Mapper):
         result = None
 
         cursor = self._connection.cursor()
-        command = "SELECT * FROM account WHERE id={}".format(id)
+        command = "SELECT * FROM account WHERE idAccount={}".format(id)
         cursor.execute(command)
         tuples = cursor.fetchall()
 
         try:
             (id, name, passwort, email) = tuples[0]
             account = Account()
-            account.id = id
-            account.name = name
-            account.passwort = passwort
-            account.email = email
+            account._id = id
+            account._name = name
+            account._passwort = passwort
+            account._email = email
             result = account
 
         except IndexError:

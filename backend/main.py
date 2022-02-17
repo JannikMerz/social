@@ -40,9 +40,8 @@ beitrag = api.model('Beitrag', {
 class AccountOps(Resource):
     @electivApp.marshal_list_with(account)
     def get(self, id):
-        result = []
         controller = Controller()
-        account = controller.get_account(id)
+        result = controller.get_account(id)
         return result
 
 
