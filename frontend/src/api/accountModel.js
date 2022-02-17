@@ -1,7 +1,6 @@
 export default class Account{
 
 	constructor(aid, aname, amail, apasswort){
-		super();
         this.id = aid
         this.name = aname
         this.mail = amail

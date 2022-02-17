@@ -1,9 +1,11 @@
+import Account from './accountModel';
+
 export default class SocialPetApi {
 
     // Singelton instance
     static #api = null;
 
-    #socialPetAPIBaseURL = '/socialPet'
+    #socialPetAPIBaseURL = 'http://127.0.0.1:5000/backend'
     /**
      * Singleton Instanz erhalten
      * 
@@ -27,7 +29,7 @@ export default class SocialPetApi {
       )
 
     //Personbezogen
-    #getPersonenURL = () => `${this.#socialPetAPIBaseURL}/personen`;
+    #getAccountByIdURL = (id) => `${this.#socialPetAPIBaseURL}/account/${id}`;
 
     //Personenbezogene
     /**
@@ -35,12 +37,13 @@ export default class SocialPetApi {
        * 
        * @public
        */
-    getPersonen() {
-      return this.#fetchAdvanced(this.#getPersonenURL()).then((responseJSON) => {
-        // console.info(customerBOs);
+     getAccountById(id) {
+      return this.#fetchAdvanced(this.#getAccountByIdURL(id)).then((responseJSON) => {
+        let account = Account.fromJSON(responseJSON);
+        console.info(account);
         return new Promise(function (resolve) {
-          resolve();
-        })           
+          resolve(account);
+        })
       })
     }
 }
