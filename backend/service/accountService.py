@@ -9,16 +9,18 @@ class AccountService(Mapper):
         result = None
 
         cursor = self._connection.cursor()
-        command = "SELECT  FROM bewertungen WHERE id={}".format(id)
+        command = "SELECT * FROM account WHERE id={}".format(id)
         cursor.execute(command)
         tuples = cursor.fetchall()
 
         try:
-            (id, note) = tuples[0]
-            bewertung = Bewertung()
-            bewertung.set_id(id)
-            bewertung.set_note(note)
-            result = bewertung
+            (id, name, passwort, email) = tuples[0]
+            account = Account()
+            account.id = id
+            account.name = name
+            account.passwort = passwort
+            account.email = email
+            result = account
 
         except IndexError:
             """Der IndexError wird oben beim Zugriff auf tuples[0] auftreten, wenn der vorherige SELECT-Aufruf

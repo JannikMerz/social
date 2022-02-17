@@ -1,6 +1,5 @@
 
-
-
+from service.accountService import AccountService
 
 
 class Controller(object):
@@ -16,3 +15,7 @@ class Controller(object):
 
         with PersonMapper() as mapper:
             return mapper.insert(user)
+
+    def get_account(self, id):
+       with AccountService() as mapper:
+            return mapper.find_by_id(id)
