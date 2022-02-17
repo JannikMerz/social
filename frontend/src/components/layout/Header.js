@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Typography, Tabs, Tab, AppBar, Toolbar, Box } from '@material-ui/core';
-import logo from './SocialPetLogo.png';
+import logo from './Logo.png';
 // import { Link as RouterLink } from 'react-router-dom';
 // import ProfileDropDown from '../dialogs/ProfileDropDown';
 
@@ -30,11 +30,13 @@ class Header extends Component {
 
     return (
     <div style={{ width: '100%'}}>
-      <AppBar style={{ backgroundColor: '#8b4500'}}>
-        <Toolbar>
-            <img src={logo} alt="Social Pet" style={{ width : 150, margin: 5}}/>
-        </Toolbar>
+      <AppBar style={{ backgroundColor: '#FFF0CA', height: '150px', justifyContent: 'center', alignItems: 'center', marginBottom: '200px'}}>
+        <img src={logo} alt="Social Pet" style={{ width : 300, margin: 50}}/>
       </AppBar>
+        <Toolbar>
+            
+        </Toolbar>
+      
       <Toolbar />
       </div>
     )

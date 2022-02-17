@@ -28,12 +28,10 @@ export default class SocialPetApi {
       }
       )
 
-    //Personbezogen
     #getAccountByIdURL = (id) => `${this.#socialPetAPIBaseURL}/account/${id}`;
 
-    //Personenbezogene
     /**
-       * Gibt alle Personen als BO zurück
+       * Gibt einen Account mit bestimmter id zurück
        * 
        * @public
        */

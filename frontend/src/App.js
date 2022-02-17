@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './components/layout/Header';
 import SocialPetApi from './api/SocialPetApi'
-import { Container } from '@material-ui/core';
+import { Container, Card, Typography } from '@material-ui/core';
+import Login from './components/pages/Login'
 
 class App extends React.Component {
 
@@ -44,12 +45,16 @@ class App extends React.Component {
 		console.log(this.state.currentAccountName)
 		return (
       <div>
-        <Header></Header>
+        {/*<Header></Header>
         <Container style={{ marginTop: '50px' }}>
-          Neuen Beitrag erstellen:<br />
-          <input type="text"></input><br />
-          <button onClick={ this.getAccountById }>Klick mich</button>
-        </Container>
+          <Card style={{ height: '300px', marginBottom: '50px' }}>
+            <Typography style={{ margin: '10px' }}>Hier Beitrag erstellen</Typography>
+          </Card>
+          <Card>
+            <Typography style={{ margin: '10px' }}>Hier Feed</Typography>
+          </Card>
+        </Container>*/}
+        <Login></Login>
       </div>
 		);
 	}
