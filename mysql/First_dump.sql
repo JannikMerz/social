@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `socialPet` DEFAULT CHARACTER SET utf8 ;
+USE `socialPet` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Accounts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Accounts` (
+CREATE TABLE IF NOT EXISTS `socialPet`.`Accounts` (
   `idAccounts` INT NOT NULL,
   `name` VARCHAR(45) NULL,
   `passwort` VARCHAR(45) NULL,
@@ -28,11 +28,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Accounts` (
   PRIMARY KEY (`idAccounts`))
 ENGINE = InnoDB;
 
+--
+-- Dumping data for table `Accounts`
+--
+
+LOCK TABLES `socialPet`.`Accounts` WRITE;
+/*!40000 ALTER TABLE `lernapp_SWPra`.`profile` DISABLE KEYS */;
+INSERT INTO `socialPet`.`Accounts` VALUES (1, 'Jannik', '1234', 'jannik@gmx.de');
+/*!40000 ALTER TABLE `lernapp_SWPra`.`profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 -- -----------------------------------------------------
 -- Table `mydb`.`beitraege`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`beitraege` (
+CREATE TABLE IF NOT EXISTS `socialPet`.`beitraege` (
   `idbeitraege` INT NOT NULL,
   `inhalt` VARCHAR(45) NULL,
   `datum` VARCHAR(45) NULL,
@@ -41,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`beitraege` (
   INDEX `fk_beitraege_Accounts_idx` (`Accounts_id` ASC) VISIBLE,
   CONSTRAINT `fk_beitraege_Accounts`
     FOREIGN KEY (`Accounts_id`)
-    REFERENCES `mydb`.`Accounts` (`idAccounts`)
+    REFERENCES `socialPet`.`Accounts` (`idAccounts`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
