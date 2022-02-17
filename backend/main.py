@@ -20,7 +20,7 @@ CORS(app, support_credentials=True, resources={r'/backend/*': {"origins": "*"}})
 api = Api(app, version='1.0', title='API',
           description='')
 
-electivApp = api.namespace('backend', description='')
+petApp = api.namespace('backend', description='')
 
 account = api.model('Account', {
     'id': fields.Integer(attribute='_id', description='ID'),
@@ -35,10 +35,10 @@ beitrag = api.model('Beitrag', {
 })
 
 
-@electivApp.route('/account/<int:id>')
-@electivApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
+@petApp.route('/account/<int:id>')
+@petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
 class AccountOps(Resource):
-    @electivApp.marshal_list_with(account)
+    @petApp.marshal_list_with(account)
     def get(self, id):
         controller = Controller()
         result = controller.get_account(id)
