@@ -17,44 +17,72 @@ class App extends React.Component {
 		};
 	}
 
-	//aktuell eingeloggten Student vom Backend abfragen
+  getSessionStorage = () => {
+    if (sessionStorage.getItem('username')){
+      this.setState({
+        currentAccountName: sessionStorage.getItem('username'),
+        loggedIn: true
+      });
+    } else {
+      this.setState({
+        currentAccountName: null,
+        loggedIn: false
+      });
+    }
+  }
+
+	// //aktuell eingeloggten Student vom Backend abfragen
 	
-	getAccountById = () => {
-		SocialPetApi.getAPI().getAccountById(1)
-			.then(account =>
-				this.setState({
-					currentAccount: account,
-          currentAccountName: account.name,
-					error: null,
-					loadingInProgress: false,
-				}))
-				.catch(e =>
-					this.setState({
-						currentAccount: null,
-						error: e,
-						loadingInProgress: false,
-					}));
-			this.setState({
-				error: null,
-				loadingInProgress: true
-			});
-	}
+	// getAccountById = () => {
+	// 	SocialPetApi.getAPI().getAccountById(1)
+	// 		.then(account =>
+	// 			this.setState({
+	// 				currentAccount: account,
+  //         currentAccountName: account.name,
+	// 				error: null,
+	// 				loadingInProgress: false,
+	// 			}))
+	// 			.catch(e =>
+	// 				this.setState({
+	// 					currentAccount: null,
+	// 					error: e,
+	// 					loadingInProgress: false,
+	// 				}));
+	// 		this.setState({
+	// 			error: null,
+	// 			loadingInProgress: true
+	// 		});
+	// }
+
+  componentDidMount() {
+		this.getSessionStorage()
+  }
 
 	/** Renders the whole app */
 	render() {
+    const { currentAccount, currentAccountName } = this.state;
 		console.log(this.state.currentAccountName)
 		return (
       <div>
-        {/*<Header></Header>
-        <Container style={{ marginTop: '50px' }}>
-          <Card style={{ height: '300px', marginBottom: '50px' }}>
-            <Typography style={{ margin: '10px' }}>Hier Beitrag erstellen</Typography>
-          </Card>
-          <Card>
-            <Typography style={{ margin: '10px' }}>Hier Feed</Typography>
-          </Card>
-        </Container>*/}
-        <Login></Login>
+        {
+        currentAccountName ?
+          <div>
+            <Header></Header>
+              <Container style={{ marginTop: '50px' }}>
+                <Card style={{ height: '300px', marginBottom: '50px' }}>
+                  <Typography style={{ margin: '10px' }}>Hier Beitrag erstellen</Typography>
+                </Card>
+                <Card>
+                  <Typography style={{ margin: '10px' }}>Hier Feed</Typography>
+                </Card>
+              </Container>
+          </div>
+
+        :
+          <Login></Login>
+        }
+
+        
       </div>
 		);
 	}

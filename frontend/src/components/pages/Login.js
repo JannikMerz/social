@@ -16,6 +16,7 @@ class Login extends Component {
             currentAccount: null,
             currentAccountName: null,
             currentAccountPasswort: null,
+            login: false,
             
             textFieldName: null,
             textFieldPasswort: null,
@@ -26,13 +27,16 @@ class Login extends Component {
 		SocialPetApi.getAPI().getAccountById(1)
 			.then(account =>
 				this.setState({
+                    currentAccount: account,
                     currentAccountName: account.name,
                     currentAccountPasswort: account.passwort,
 					error: null,
 					loadingInProgress: false,
-				}))
-				.catch(e =>
+				})).then(() => {
+                    this.compareNameAndPW();
+				}).catch(e =>
 					this.setState({
+                        currentAccount: null,
                         currentAccountName: null,
                         currentAccountPasswort: null,
 						error: e,
@@ -58,9 +62,13 @@ class Login extends Component {
 
     compareNameAndPW = () => {
         if (this.state.currentAccountName === this.state.textFieldName && this.state.currentAccountPasswort === this.state.textFieldPasswort) {
-            console.log("Juhu")
+            this.setState({
+                login: true
+            });
+            sessionStorage.setItem('username', this.state.currentAccountName)
+            window.location.reload()
         } else {
-            console.log("Noo")
+            alert("Falsche Anmeldedaten")
         }
     }
 
