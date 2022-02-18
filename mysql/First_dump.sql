@@ -41,7 +41,7 @@ UNLOCK TABLES;
 CREATE TABLE IF NOT EXISTS `socialPet`.`beitrag` (
   `idBeitrag` INT NOT NULL,
   `titel` VARCHAR(45) NULL,
-  `inhalt` VARCHAR(45) NULL,
+  `inhalt` VARCHAR(10000) NULL,
   `datum` VARCHAR(45) NULL,
   `accountId` INT NOT NULL,
   PRIMARY KEY (`idbeitrag`, `accountId`),

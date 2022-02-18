@@ -36,29 +36,6 @@ class App extends React.Component {
     }
   }
 
-	// //aktuell eingeloggten Student vom Backend abfragen
-	
-	// getAccountById = () => {
-	// 	SocialPetApi.getAPI().getAccountById(1)
-	// 		.then(account =>
-	// 			this.setState({
-	// 				currentAccount: account,
-  //         currentAccountName: account.name,
-	// 				error: null,
-	// 				loadingInProgress: false,
-	// 			}))
-	// 			.catch(e =>
-	// 				this.setState({
-	// 					currentAccount: null,
-	// 					error: e,
-	// 					loadingInProgress: false,
-	// 				}));
-	// 		this.setState({
-	// 			error: null,
-	// 			loadingInProgress: true
-	// 		});
-	// }
-
   componentDidMount() {
 		this.getSessionStorage()
   }
