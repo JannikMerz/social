@@ -14,8 +14,7 @@ class ProfilModal extends Component {
           currentAccount: null,
           currentAccountName: props.user,
           currentAccountEmail: null,
-          currentAccountImg: null,
-          image: require('../../images/Logo.png')
+          currentAccountImg: null
         };
     }
 
@@ -94,7 +93,7 @@ class ProfilModal extends Component {
 
             <CardHeader
                 avatar={
-                    <Avatar style={{ backgroundColor: 'orange', width: '60px', height: '60px', fontSize: '30px' }} >
+                    <Avatar style={{ backgroundColor: 'red', width: '60px', height: '60px', fontSize: '30px' }} >
                         {currentAccountName.charAt(0)}
                     </Avatar>
                 } style={{  marginLeft: '38%' }}
