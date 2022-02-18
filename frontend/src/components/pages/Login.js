@@ -1,10 +1,7 @@
-import React, { Component, useState } from "react";
-import { Grid, FormControl, FormLabel, TextField, Button } from '@material-ui/core';
-import logo from '../layout/Logo.png'
+import React, { Component } from "react";
+import { Grid, FormControl, TextField, Button } from '@material-ui/core';
+import logo from '../resources/Logo.png'
 import SocialPetApi from '../../api/SocialPetApi'
-
-//import 'bcryptjs';
-import { render } from "react-dom";
 
 class Login extends Component {
 
@@ -23,8 +20,8 @@ class Login extends Component {
         };
     }
 
-    getAccountById = () => {
-		SocialPetApi.getAPI().getAccountById(1)
+    getAccountByName = () => {
+		SocialPetApi.getAPI().getAccountByName(this.state.textFieldName)
 			.then(account =>
 				this.setState({
                     currentAccount: account,
@@ -83,16 +80,16 @@ class Login extends Component {
                 <form>
                     <Grid style={{ margin: '10px' }}>
                         <FormControl>
-                            <TextField value={this.state.textFieldName} onChange = { this.handleNameTextFieldChange } id="outlined-basic" label="Name" variant="outlined" />
+                            <TextField style={{ backgroundColor: 'white' }} value={this.state.textFieldName} onChange = { this.handleNameTextFieldChange } id="outlined-basic" label="Name" variant="outlined" />
                         </FormControl>
                     </Grid>
                     <Grid style={{ margin: '10px' }}>
                         <FormControl>
-                            <TextField value={this.state.textFieldPasswort} onChange = { this.handlePasswortTextFieldChange } type="password" id="outlined-basic" label="Passwort" variant="outlined" />
+                            <TextField style={{ backgroundColor: 'white' }} value={this.state.textFieldPasswort} onChange = { this.handlePasswortTextFieldChange } type="password" id="outlined-basic" label="Passwort" variant="outlined" />
                         </FormControl>
                     </Grid>
                     <Grid>
-                        <Button onClick = { this.getAccountById } variant="contained" style={{ backgroundColor: '#EDA900', borderRadius: '15px', margin: '20px' }}>Anmelden</Button>
+                        <Button onClick = { this.getAccountByName } variant="contained" style={{ backgroundColor: '#EDA900', borderRadius: '15px', margin: '20px' }}>Anmelden</Button>
                     </Grid>
                 </form>
             </div>

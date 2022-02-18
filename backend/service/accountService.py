@@ -1,5 +1,6 @@
 from service.mapper import Mapper
 from model.accountModel import Account
+import base64
 
 class AccountService(Mapper):
     def __init__(self):
@@ -81,9 +82,30 @@ class AccountService(Mapper):
         return result
 
 
-    def insert(self):
-        """Add the given object to the database"""
-        pass
+    def insert(self, account):
+
+        cursor = self._connection.cursor()
+        cursor.execute("SELECT MAX(idAccount) AS maxid FROM account")
+        tuples = cursor.fetchall()
+
+        for (maxid) in tuples:
+            if maxid[0] is None:
+                account._id = 1
+            else:
+                account._id = maxid[0]+1
+
+        command = "INSERT INTO account (idAccount, name, passwort, email) VALUES (%s,%s,%s,%s)"
+        data = (
+            account._id,
+            account._name,
+            account._passwort,
+            account._email,
+        )
+        cursor.execute(command, data)
+        self._connection.commit()
+        cursor.close()
+
+        return account
 
     def update(self):
         """Update an already given object in the DB"""

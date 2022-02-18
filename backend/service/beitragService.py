@@ -17,12 +17,13 @@ class BeitragService(Mapper):
         cursor.execute("SELECT * from beitrag ORDER BY datum DESC LIMIT 50")
         tuples = cursor.fetchall()
 
-        for (idBeitrag, titel, inhalt, datum, accountId) in tuples:
+        for (idBeitrag, titel, inhalt, datum, img, accountId) in tuples:
             beitrag = Beitrag()
             beitrag._id = idBeitrag
             beitrag._titel = titel
             beitrag._inhalt = inhalt
             beitrag._erstellungszeit = datum
+            beitrag._img = img
             beitrag._accountId = accountId
             result.append(beitrag)
 
@@ -42,12 +43,13 @@ class BeitragService(Mapper):
             else:
                 beitrag._id = maxid[0]+1
 
-        command = "INSERT INTO beitrag (idBeitrag, titel, inhalt, datum, accountId) VALUES (%s,%s,%s,%s, %s)"
+        command = "INSERT INTO beitrag (idBeitrag, titel, inhalt, datum, img, accountId) VALUES (%s,%s,%s,%s,%s,%s)"
         data = (
             beitrag._id,
             beitrag._titel,
             beitrag._inhalt,
             beitrag._erstellungszeit,
+            beitrag._img,
             beitrag._accountId
         )
         cursor.execute(command, data)

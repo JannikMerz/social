@@ -1,8 +1,5 @@
-# Die WahlfachApp basiert auf Flask
 from flask import Flask
-# Die Flask Erweiterung Flask CORS wird für Cross-Origin Resource Sharing verwendet
 from flask_cors import CORS
-# Des Weiteren wird das auf Flask aufbauende Flask-RestX verwendet
 from flask_restx import Api, Resource, fields
 from flask import request
 import json
@@ -28,7 +25,6 @@ account = api.model('Account', {
     'name': fields.String(attribute='_name', description='Name'),
     'passwort': fields.String(attribute='_passwort', description='PW'),
     'email': fields.String(attribute='_email', description='Mail'),
-
 })
 
 beitrag = api.model('Beitrag', {
@@ -36,6 +32,7 @@ beitrag = api.model('Beitrag', {
     'datum': fields.String(attribute='_erstellungszeit', description=''),
     'titel': fields.String(attribute='_titel', description=''),
     'inhalt': fields.String(attribute='_inhalt', description=''),
+    'img': fields.String(attribute='_img', description=''),
     'accountId': fields.Integer(attribute='_accountId', description=''),
 })
 
@@ -58,6 +55,20 @@ class AccountOps(Resource):
         result = controller.get_account_by_name(name)
         return result
 
+@petApp.route('/account')
+@petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
+class AccountOps(Resource):
+    @petApp.expect(account)
+    def post(self):
+        controller = Controller()
+        account = Account.from_dict(api.payload)
+
+        if account is not None:
+            controller.post_account(account)
+            return 200
+        else: 
+            return '', 500
+
 @petApp.route('/beitraege')
 @petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
 class BeitraegeOps(Resource):
@@ -70,10 +81,8 @@ class BeitraegeOps(Resource):
 @petApp.route('/beitrag')
 @petApp.response(500, 'Falls es zu einem Server-seitigen Fehler kommt.')
 class ProjektartOperationen(Resource):
-
     @petApp.expect(beitrag)
-    def post (self):
-        
+    def post(self):
         controller = Controller()
         beitrag = Beitrag.from_dict(api.payload)
 

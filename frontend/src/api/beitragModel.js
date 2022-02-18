@@ -1,10 +1,11 @@
 export default class Beitrag{
 
-	constructor(aid, adatum, atitel, ainhalt, aaccount){
+	constructor(aid, adatum, atitel, ainhalt, aimg, aaccount){
         this.id = aid
         this.datum = adatum
 		this.titel = atitel
         this.inhalt = ainhalt
+		this._img = aimg
         this.accountId = aaccount	
     }
 

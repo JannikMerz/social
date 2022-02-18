@@ -8,6 +8,7 @@ class Beitrag:
         self._erstellungszeit = datetime.datetime.now().replace(second=0, microsecond=0)
         self._titel = ''
         self._inhalt = ''
+        self._img = ''
         self._accountId = ''
 
 
@@ -17,5 +18,6 @@ class Beitrag:
         obj._id = dictionary['id']
         obj._titel = dictionary['titel']
         obj._inhalt = dictionary['inhalt']
+        obj._img = dictionary['img']
         obj._accountId = dictionary['accountId']
         return obj

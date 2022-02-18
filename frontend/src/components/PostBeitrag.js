@@ -18,6 +18,7 @@ class PostBeitrag extends Component {
         this.state = {
             titel: '',
             inhalt: '',
+            image: null,
             error: null,
             loadingInProgress: false,
         };
@@ -35,16 +36,32 @@ class PostBeitrag extends Component {
             inhalt: value
         });
     }
+    imageValueChange = event => {
+        const value = event.target.value;
+        this.setState({
+            image: value
+        });
+    }
+
 
     postBeitrag = async () => {
-        let beitrag = new Beitrag(1, 0, this.state.titel, this.state.inhalt, 1 /* account.id */)
+        let beitrag = new Beitrag(1, 0, this.state.titel, this.state.inhalt, this.state.image, 1 /* account.id */)
         await SocialPetApi.getAPI().postBeitrag(beitrag);
         this.setState({
             titel: '',
-            inhalt: ''
+            inhalt: '',
+            image: ''
         });
         this.props.loadBeitraege();
     }
+
+    onImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          this.setState({
+            image: URL.createObjectURL(event.target.files[0])
+          });
+        }
+       }
 
 
     componentDidMount() {
@@ -54,9 +71,10 @@ class PostBeitrag extends Component {
 
     /** Renders the component */
     render() {
-        const { titel, inhalt } = this.state;
+        const { titel, inhalt, image } = this.state;
+        console.log(this.state.image)
         return (
-            <Card style={{ marginTop: '125px', marginBottom: '50px' }}>
+            <Card style={{ marginTop: '20px', marginBottom: '50px' }}>
                 <div style={{ margin: '25px' }}>
                     <Stack spacing={2}>
                         <Typography>Erstelle einen Post</Typography>
@@ -75,10 +93,18 @@ class PostBeitrag extends Component {
                             value={inhalt}
                             variant="outlined"
                             onChange={this.inhaltValueChange} />
+                        <TextField
+                            label='Lade hier deine Bild-URL hoch'
+                            value={image}
+
+                            variant="outlined" a
+                            onChange={this.imageValueChange} />
                     </Stack>
+
+                
                     <div style={{ display: "flex" }}>
 
-                        <Button style={{ marginTop: '20px', marginLeft: "auto" }} onClick={this.postBeitrag}>Abschicken</Button>
+                        <Button style={{ marginTop: '20px', marginLeft: "auto", backgroundColor: '#EDA900', color: 'white' }} onClick={this.postBeitrag}>Abschicken</Button>
                     </div>
 
                 </div>

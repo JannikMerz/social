@@ -1,12 +1,11 @@
 import React from 'react';
 import Header from './components/layout/Header';
-import SocialPetApi from './api/SocialPetApi'
-import { Container, Card, Typography } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import Login from './components/pages/Login'
-import Test from './components/dialogs/ProfilDropDown.js'
-
+import background from './Background.png'
 import BeitragListe from './components/BeitragListe'
 import PostBeitrag from './components/PostBeitrag'
+import ProfileDropDown from './components/dialogs/ProfilDropDown';
 
 class App extends React.Component {
 
@@ -46,18 +45,23 @@ class App extends React.Component {
 
 	/** Renders the whole app */
 	render() {
-    const { currentAccount, currentAccountName } = this.state;
+    const { currentAccountName } = this.state;
 		console.log(this.state.currentAccountName)
 		return (
-      <div>
+      <div style={{
+        backgroundImage: `url(${background})`,
+        height: '100%'
+        }}>
         {
         currentAccountName ?
           <div>
             <Header currentAccountName={ currentAccountName }></Header>
-			<Container maxWidth='md' style={{ marginTop: '50px' }}>
-			<PostBeitrag loadBeitraege={this.loadBeitraege}></PostBeitrag>
-			<BeitragListe ref={this.child}></BeitragListe>
-        </Container>           
+            <Container maxWidth='md' style={{ alignItems: 'right'}}>
+              <ProfileDropDown currentAccountName={ currentAccountName } style={{ alignItems: 'right'}}></ProfileDropDown>
+
+              <PostBeitrag loadBeitraege={this.loadBeitraege}></PostBeitrag>
+              <BeitragListe ref={this.child}></BeitragListe>
+            </Container>           
 
           </div>
 

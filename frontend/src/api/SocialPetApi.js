@@ -75,6 +75,7 @@ export default class SocialPetApi {
         headers: {
           'Accept': 'application/json, text/plain',
           'Content-type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(beitrag)
       })

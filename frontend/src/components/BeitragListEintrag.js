@@ -90,8 +90,8 @@ class BeitragListeEintrag extends Component {
                             <CardContent>
                                 <Typography variant="body2" color="text.secondary">
                                    {beitrag.inhalt}
-                                   
-                                </Typography>
+                                </Typography><br/>
+                                <img src={beitrag.img} alt='img' style={{ width: '200px' }}></img>
                             </CardContent>
                             <CardActions disableSpacing style={{ display: "flex" }}>
                                 <Typography variant="body2" color="text.secondary" style={{marginLeft: "10px"}}> von {accountName}</Typography>
