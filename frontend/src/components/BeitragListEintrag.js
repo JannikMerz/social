@@ -81,17 +81,16 @@ class BeitragListeEintrag extends Component {
                                 title={beitrag.titel}
                                 subheader={beitrag.datum}
                             />
-                            {/* <CardMedia
+                            <CardMedia
                                 component="img"
                                 height=""
-                                image=""
-                                alt="Kein Foto"
-                            /> */}
+                                image={beitrag.img}
+                                alt={null}
+                            />
                             <CardContent>
                                 <Typography variant="body2" color="text.secondary">
                                    {beitrag.inhalt}
                                 </Typography><br/>
-                                <img src={beitrag.img} alt='img' style={{ width: '200px' }}></img>
                             </CardContent>
                             <CardActions disableSpacing style={{ display: "flex" }}>
                                 <Typography variant="body2" color="text.secondary" style={{marginLeft: "10px"}}> von {accountName}</Typography>
