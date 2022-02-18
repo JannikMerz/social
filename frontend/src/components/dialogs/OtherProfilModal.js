@@ -3,7 +3,7 @@ import { Typography, Button, Modal, Card, CardHeader, Avatar } from '@material-u
 import SocialPetApi from '../../api/SocialPetApi'
 import close from '../resources/Close.png'
 
-class ProfilModal extends Component {
+class OtherProfilModal extends Component {
 
     constructor(props) {
         super(props);
@@ -55,6 +55,7 @@ class ProfilModal extends Component {
 
     componentDidMount() {
 		this.getAccountByName()
+        this.handleOpen()
     }
 
   
@@ -64,9 +65,7 @@ class ProfilModal extends Component {
         console.log(image)
         return (
         <div>
-                
-            
-            <Button onClick={this.handleOpen} style={{margin: '10px', marginLeft: '40px', marginRight: '40px', marginTop: '10px', color: '#EDA900'}}>Profil</Button>
+
             <Modal
             open={open}
             onClose={this.handleClose}
@@ -100,7 +99,7 @@ class ProfilModal extends Component {
             />
 
                 <Typography id="modal-modal-title" variant="h4" component="h2" style={{ marginBottom: '20px' }}>
-                    Hallo, { currentAccountName }!
+                    Profil von { currentAccountName }
                 </Typography>
                 <Typography id="modal-modal-description" style={{ mt: 2, marginBottom: '40px' }}>
                     E-Mail: { currentAccountEmail }
@@ -113,4 +112,4 @@ class ProfilModal extends Component {
         );
     }
   }
-  export default ProfilModal;
+  export default OtherProfilModal;

@@ -56,7 +56,7 @@ class App extends React.Component {
         currentAccountName ?
           <div>
             <Header currentAccountName={ currentAccountName }></Header>
-            <Container maxWidth='md' style={{ alignItems: 'right'}}>
+            <Container maxWidth='md' style={{ alignItems: 'right', width: '800px'}}>
               <ProfileDropDown currentAccountName={ currentAccountName } style={{ alignItems: 'right'}}></ProfileDropDown>
 
               <PostBeitrag loadBeitraege={this.loadBeitraege} currentAccountName={currentAccountName}></PostBeitrag>

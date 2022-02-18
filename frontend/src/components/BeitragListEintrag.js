@@ -13,6 +13,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import OtherProfilModal from './dialogs/OtherProfilModal'
 
 import SocialPetApi from '../api/SocialPetApi';
 
@@ -26,6 +27,7 @@ class BeitragListeEintrag extends Component {
         this.state = {
             account: null,
             accountName: '',
+            open: false,
             like: false,
             error: null,
             loadingInProgress: false,
@@ -64,18 +66,32 @@ class BeitragListeEintrag extends Component {
         this.getAccountById(this.props.beitrag.accountId)
     }
 
+    openProfile = () => {
+        this.setState({
+            open: true
+        });
+    }
+
     render() {
         const { beitrag } = this.props;
-        const { like, accountName } = this.state;
+        const { like, accountName, open } = this.state;
 
         return (
-            <div style={{ marginTop: '50px', marginBottom: '50px'}}>
+            <div style={{ marginTop: '50px', marginBottom: '50px', display: 'flex', justifyContent: 'center'}}>
+                {
+                    open ?
+                        <OtherProfilModal user={ accountName }></OtherProfilModal>
+
+                    :
+                    <></>
+
+                }
                 {
                     beitrag ?
-                        <Card>
+                        <Card style={{ width: '800px' }}>
                             <CardHeader
                                 avatar={
-                                    <Avatar sx={{ bgcolor: red[500] }} >
+                                    <Avatar onClick={ this.openProfile } sx={{ bgcolor: red[500] }} >
                                         {accountName.charAt(0)}
                                     </Avatar>
                                 }
