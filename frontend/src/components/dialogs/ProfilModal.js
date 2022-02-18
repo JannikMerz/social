@@ -103,7 +103,7 @@ class ProfilModal extends Component {
                 <Typography id="modal-modal-title" variant="h4" component="h2" style={{ marginBottom: '20px' }}>
                     Hallo, { currentAccountName }!
                 </Typography>
-                <Typography id="modal-modal-description" style={{ mt: 2 }}>
+                <Typography id="modal-modal-description" style={{ mt: 2, marginBottom: '40px' }}>
                     E-Mail: { currentAccountEmail }
                 </Typography>
             </Card>
