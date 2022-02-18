@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 
 LOCK TABLES `socialPet`.`account` WRITE;
 /*!40000 ALTER TABLE `socialPet`.`Account` DISABLE KEYS */;
-INSERT INTO `socialPet`.`account` VALUES (1, 'Jannik', '1234', 'jannik@gmx.de'), (2, 'Maria', '4321', 'maria@gmx.de'), (3, 'Max Mustermann', '9876', 'max@gmx.de');
+INSERT INTO `socialPet`.`account` VALUES (1, 'Jannik', '1234', 'jannik@gmx.de'), (2, 'Maria', '4321', 'maria@gmx.de'), (3, 'Max Mustermann', '9876', 'max@gmx.de'), (4, 'David Klotz', 'passwort1234', 'klotz@hdm-stuttgart.de');
 /*!40000 ALTER TABLE `socialPet`.`Account` ENABLE KEYS */;
 UNLOCK TABLES;
 
