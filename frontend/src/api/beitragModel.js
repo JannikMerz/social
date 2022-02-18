@@ -5,7 +5,7 @@ export default class Beitrag{
         this.datum = adatum
 		this.titel = atitel
         this.inhalt = ainhalt
-		this._img = aimg
+		this.img = aimg
         this.accountId = aaccount	
     }
 
