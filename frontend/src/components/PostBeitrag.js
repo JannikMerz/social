@@ -19,6 +19,8 @@ class PostBeitrag extends Component {
             titel: '',
             inhalt: '',
             image: null,
+            currentAccountName: props.currentAccountName,
+            accId: null,
             error: null,
             loadingInProgress: false,
         };
@@ -45,7 +47,8 @@ class PostBeitrag extends Component {
 
 
     postBeitrag = async () => {
-        let beitrag = new Beitrag(1, 0, this.state.titel, this.state.inhalt, this.state.image, 1 /* account.id */)
+        console.log(this.state.accId)
+        let beitrag = new Beitrag(1, 0, this.state.titel, this.state.inhalt, this.state.image,  this.state.accId)
         await SocialPetApi.getAPI().postBeitrag(beitrag);
         this.setState({
             titel: '',
@@ -63,8 +66,29 @@ class PostBeitrag extends Component {
         }
        }
 
+    getAccountByName = () => {
+        console.log(this.state.currentAccountName)
+		SocialPetApi.getAPI().getAccountByName(this.state.currentAccountName)
+			.then(account =>
+				this.setState({
+                    accId: account.id,
+					error: null,
+					loadingInProgress: false,
+				})).catch(e =>
+					this.setState({
+                        accId: null,
+						error: e,
+						loadingInProgress: false,
+					}));
+			this.setState({
+				error: null,
+				loadingInProgress: true
+			});
+	}
+
 
     componentDidMount() {
+        this.getAccountByName()
     }
 
 

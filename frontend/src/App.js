@@ -59,7 +59,7 @@ class App extends React.Component {
             <Container maxWidth='md' style={{ alignItems: 'right'}}>
               <ProfileDropDown currentAccountName={ currentAccountName } style={{ alignItems: 'right'}}></ProfileDropDown>
 
-              <PostBeitrag loadBeitraege={this.loadBeitraege}></PostBeitrag>
+              <PostBeitrag loadBeitraege={this.loadBeitraege} currentAccountName={currentAccountName}></PostBeitrag>
               <BeitragListe ref={this.child}></BeitragListe>
             </Container>           
 

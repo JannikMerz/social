@@ -60,6 +60,7 @@ class BeitragListeEintrag extends Component {
             }
 
     componentDidMount = () => {
+        console.log(this.props.beitrag.accountId)
         this.getAccountById(this.props.beitrag.accountId)
     }
 
