@@ -89,7 +89,7 @@ class Login extends Component {
                         </FormControl>
                     </Grid>
                     <Grid>
-                        <Button onClick = { this.getAccountByName } variant="contained" style={{ backgroundColor: '#EDA900', borderRadius: '15px', margin: '20px' }}>Anmelden</Button>
+                        <Button onClick = { this.getAccountByName } variant="contained" style={{ backgroundColor: '#EDA900', borderRadius: '15px', margin: '20px', marginBottom: '300px' }}>Anmelden</Button>
                     </Grid>
                 </form>
             </div>
